@@ -17,9 +17,16 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 
+
+from users.views import home, verify
+
 urlpatterns = [
-    # path('', include()),
+    path('', home, name='home'),
     path('admin/', admin.site.urls),
+
+    # Verify users by redirect link on e-mail
+    path('verify/<uuid:uuid>', verify, name='verify'),
+    path('api/v1/', include('posts.urls')),
 ]
 
 if settings.DEBUG:
